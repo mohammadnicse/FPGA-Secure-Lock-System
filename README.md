@@ -1,13 +1,27 @@
 # FPGA Secure Access Control System (Verilog)
 
-```text
-[IDLE] --(Input 1)--> [S1] --(Input 2)--> [S2] --(Input 3)--> [S3] --(Input 4)--> [OPEN]
-  |                    |                   |                   |
-  | (Wrong Input)      | (Wrong Input)     | (Wrong Input)     | (Wrong Input)
-  v                    v                   v                   v
-[ERROR STATE] <--------+-------------------+-------------------+
-      |
-      +---(3rd Failure)--> [ALARM / LOCKOUT]
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE
+    IDLE --> S1 : Input = 1
+    IDLE --> ERROR : Input != 1
+
+    S1 --> S2 : Input = 2
+    S1 --> ERROR : Input != 2
+
+    S2 --> S3 : Input = 3
+    S2 --> ERROR : Input != 3
+
+    S3 --> OPEN : Input = 4
+    S3 --> ERROR : Input != 4
+
+    ERROR --> IDLE : Reset
+    ERROR --> ALARM : Errors >= 3
+
+    OPEN --> IDLE : Reset
+    ALARM --> [*] : Hard Lock
+```
+
 
 ## Project Overview
 This project implements a **Hardware-Based Security System** using a Finite State Machine (FSM) in Verilog. Unlike software passwords which can be bypassed via memory buffer overflows, this logic is synthesized directly into hardware gates, providing a "Hardware Root of Trust."
