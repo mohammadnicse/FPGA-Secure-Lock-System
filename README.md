@@ -51,7 +51,7 @@ Signal Debouncing: In this simulation, button presses are ideal square waves. If
 ### 1. Successful Access
 The waveform below demonstrates a valid entry sequence (`1 -> 2 -> 3 -> 4`). The `unlock` signal (bottom line) transitions to HIGH only after the 4th correct digit is latched.
 
-![Waveform Success](waveform_evidence.png)
+![Waveform Success](simulation_waveform.png)
 
 ### 2. Security Lockout (Brute Force Test)
 The testbench simulates an attacker entering random digits (`9-8-7`).
@@ -66,5 +66,6 @@ SUCCESS: Door Unlocked!
 Test 2: Simulating Brute Force Attack...
 
 SUCCESS: Alarm Triggered!
+
 
 
