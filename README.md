@@ -2,21 +2,16 @@
 
 stateDiagram-v2
     [*] --> IDLE
-    IDLE --> S1 : Input = 1
-    IDLE --> ERROR : Input != 1
-    
-    S1 --> S2 : Input = 2
-    S1 --> ERROR : Input != 2
-    
-    S2 --> S3 : Input = 3
-    S2 --> ERROR : Input != 3
-    
-    S3 --> OPEN : Input = 4
-    S3 --> ERROR : Input != 4
-    
+    IDLE --> S1 : Input 1
+    IDLE --> ERROR : Input not 1
+    S1 --> S2 : Input 2
+    S1 --> ERROR : Input not 2
+    S2 --> S3 : Input 3
+    S2 --> ERROR : Input not 3
+    S3 --> OPEN : Input 4
+    S3 --> ERROR : Input not 4
     ERROR --> IDLE : Reset
-    ERROR --> ALARM : Errors >= 3
-    
+    ERROR --> ALARM : Errors 3+
     OPEN --> IDLE : Reset
     ALARM --> [*] : Hard Lock
 
@@ -63,3 +58,4 @@ SUCCESS: Door Unlocked!
 Test 2: Simulating Brute Force Attack...
 
 SUCCESS: Alarm Triggered!
+
